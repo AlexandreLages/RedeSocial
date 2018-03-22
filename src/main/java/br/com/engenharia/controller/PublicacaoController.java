@@ -8,7 +8,6 @@ import br.com.caelum.vraptor.Controller;
 import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Result;
 import br.com.engenharia.dao.PublicacaoDAO;
-import br.com.engenharia.dao.UsuarioDAO;
 import br.com.engenharia.model.Publicacao;
 import br.com.engenharia.model.Usuario;
 import br.com.engenharia.session.UsuarioSession;
@@ -16,13 +15,10 @@ import br.com.engenharia.session.UsuarioSession;
 @Controller
 public class PublicacaoController {
 
-	@Inject
-	UsuarioSession sessao;
-	@Inject
-	Result result;
-	@Inject
-	PublicacaoDAO dao;
-	
+	@Inject private UsuarioSession sessao;
+	@Inject private Result result;
+	@Inject private PublicacaoDAO dao;
+
 	
 	@Post("/publicacao/adicionar")
 	public void adicionar(Publicacao publicacao) {
