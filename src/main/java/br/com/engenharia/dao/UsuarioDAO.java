@@ -17,6 +17,16 @@ public class UsuarioDAO {
 		this.session.save(usuario);
 	}
 	
+	public Usuario atualizar(Usuario usuario) {
+		return (Usuario) session.merge(usuario);
+	}
+	
+	public Usuario buscar(Long id) {
+		return (Usuario) this.session.createCriteria(Usuario.class)
+				.add(Restrictions.eq("id", id))
+				.uniqueResult();
+	}
+	
 	public Boolean verificarUsuarioPorEmail(Usuario usuario) {
 		return this.session.createCriteria(Usuario.class)
 				.add(Restrictions.eq("email", usuario.getEmail()))

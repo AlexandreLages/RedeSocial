@@ -1,5 +1,6 @@
 package br.com.engenharia.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -10,6 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+
+import br.com.engenharia.util.OrdenacaoGenerica;
+import br.com.engenharia.util.SortType;
 
 @Entity
 public class Usuario {
@@ -23,10 +27,10 @@ public class Usuario {
 	private String senha;
 	
 	@ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-	private List<Usuario> amigos;
+	private List<Usuario> amigos = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "usuario", targetEntity = Publicacao.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Publicacao> publicacoes;
+	private List<Publicacao> publicacoes = new ArrayList<>();
 	
 	public Long getId() {
 		return id;
@@ -75,4 +79,20 @@ public class Usuario {
 	public void setPublicacoes(List<Publicacao> publicacoes) {
 		this.publicacoes = publicacoes;
 	}
+	
+	public List<Publicacao> publicacoesParaLinhaDoTempo() {
+		ArrayList<Publicacao> minhasPublicacoes = new ArrayList<Publicacao>();
+		
+		minhasPublicacoes.addAll(publicacoes);
+		
+		for (Usuario usuario : amigos) {
+			minhasPublicacoes.addAll(usuario.getPublicacoes());
+		}
+		
+		OrdenacaoGenerica.sortList(minhasPublicacoes, "dataDaPostagem", SortType.DESC);
+		
+		return minhasPublicacoes;
+	}
+	
+	
 }

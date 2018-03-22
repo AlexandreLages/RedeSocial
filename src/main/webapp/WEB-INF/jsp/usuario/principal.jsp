@@ -51,33 +51,33 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
   						<h4 class="text-primary">Adicionar Publicação</h4>
-  						<form action="<c:url value="/publicacao/adicionar"/>">
+  						<form action="<c:url value="/publicacao/adicionar"/>" method="post">
   							<div class="form-group">
 								<label for="titulo">Título da Publicação</label> 
 								<input type="text" class="form-control" id="titulo" name="publicacao.titulo" required>
 							</div>
 							<div class="form-group">
   								<label for="publicacao">Publicação</label>
-  								<textarea class="form-control" rows="3" id="publicacao"></textarea>
+  								<textarea class="form-control" rows="3" name="publicacao.conteudo"></textarea>
 							</div>
 							<input type="submit" class="btn btn-primary pull-right" value="Publicar">
   						</form>
   					</div>
 				</div>
-				<div class="panel panel-default">
-  					<div class="panel-body">
-  						<h4 class="text-primary">Título da Publicação</h4>
-  						<h5 class="text-muted">Subtítulo da Publicação</h5>
-  						<p>O Curso Online de Javascript Moderno da Udemy traz o conteúdo definitivo para quem deseja se aprofundar em uma das linguagens mais essenciais no currículo de qualquer programador. Todos os conceitos são explicados do zero incluindo temas avançados, como as novas funcionalidades da linguagem e suas possíveis interações. Aproveite o desconto de 83% durante o lançamento do curso, com pagamento único e sem mensalidade. O acesso ao conteúdo é vitalício para que você possa assistir às aulas no seu ritmo, sem pressa. E com a Garantia de Satisfação da Udemy, se você não gostar do curso, recebe o seu dinheiro de volta!</p>
-  					</div>
-				</div>
-				<div class="panel panel-default">
-  					<div class="panel-body">
-  						<h4 class="text-primary">Título da Publicação</h4>
-  						<h5 class="text-muted">Subtítulo da Publicação</h5>
-  						<p>O Curso Online de Javascript Moderno da Udemy traz o conteúdo definitivo para quem deseja se aprofundar em uma das linguagens mais essenciais no currículo de qualquer programador. Todos os conceitos são explicados do zero incluindo temas avançados, como as novas funcionalidades da linguagem e suas possíveis interações. Aproveite o desconto de 83% durante o lançamento do curso, com pagamento único e sem mensalidade. O acesso ao conteúdo é vitalício para que você possa assistir às aulas no seu ritmo, sem pressa. E com a Garantia de Satisfação da Udemy, se você não gostar do curso, recebe o seu dinheiro de volta!</p>
-  					</div>
-				</div>
+				
+				
+				
+				<c:forEach items="${feed}" var="publicacao" >
+
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h4 class="text-primary">${publicacao.titulo}</h4>
+							<h5 class="text-muted">Autor: ${publicacao.usuario.nome}</h5>
+							<p>${publicacao.conteudo}</p>
+						</div>
+					</div>
+
+				</c:forEach>
 			</div>
 			<div class="col-md-3">
 				<ul class="list-group">

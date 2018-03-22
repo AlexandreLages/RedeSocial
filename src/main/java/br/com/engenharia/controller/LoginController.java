@@ -27,7 +27,7 @@ public class LoginController {
 			usuarioSession.login(usuarioLogado);
 			result.redirectTo(UsuarioController.class).principal();
 		} else {
-			result.include("erro", "Usuário/Senha inválido(s).");
+			result.include("erro", "Usuario/Senha invalido(s).");
 			result.redirectTo(LoginController.class).telaLogin();
 		}
 	}
