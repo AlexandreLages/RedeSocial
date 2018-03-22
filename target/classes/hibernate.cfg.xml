@@ -11,5 +11,8 @@
 		<property name="show_sql">false</property>
 		<property name="format_sql">true</property>
 		
+		<mapping class="br.com.engenharia.model.Publicacao"/>
+		<mapping class="br.com.engenharia.model.Usuario"/>
+		
 	</session-factory>
 </hibernate-configuration>
