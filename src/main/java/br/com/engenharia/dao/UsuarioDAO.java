@@ -17,9 +17,16 @@ public class UsuarioDAO {
 		this.session.save(usuario);
 	}
 	
-	public Boolean verificarUsuario(Usuario usuario) {
+	public Boolean verificarUsuarioPorEmail(Usuario usuario) {
 		return this.session.createCriteria(Usuario.class)
 				.add(Restrictions.eq("email", usuario.getEmail()))
 				.uniqueResult() != null;
+	}
+	
+	public Usuario pesquisarUsuarioPorEmailESenha(Usuario usuario) {
+		return (Usuario) this.session.createCriteria(Usuario.class)
+				.add(Restrictions.eq("email", usuario.getEmail()))
+				.add(Restrictions.eq("senha", usuario.getSenha()))
+				.uniqueResult();
 	}
 }

@@ -14,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Login/Criar Conta</title>
 </head>
 <body style="background-image:url('https://www.designerd.com.br/wp-content/uploads/2013/06/criar-rede-social.png')">
 	<div class="container" style="padding-top: 100px;" >
@@ -23,16 +23,21 @@
 				<div class="col-md-6">
 					<div class="panel panel-default">
 						<div class="panel-body">
-							<h4>Login</h4>
+							<h4>Entrar</h4>
+							<c:if test="${mensagem != null}">
+								<span class="form-text text-success">${mensagem}</span>
+							</c:if>
+							<c:if test="${erro != null}">
+								<span class="form-text text-danger">${erro}</span>
+							</c:if>
 							<form action="<c:url value="/login"/>" method="post">
 								<div class="form-group">
 									<label for="email">Email</label> 
-									<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Digite seu email">
-									<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+									<input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Digite seu email" name="usuario.email">
 								</div>
 								<div class="form-group">
 									<label for="senha">Senha</label> 
-									<input type="password" class="form-control" id="senha" placeholder="Digite sua senha">
+									<input type="password" class="form-control" id="senha" placeholder="Digite sua senha" name="usuario.senha">
 								</div>
 								<button type="submit" class="btn btn-success btn-block">Entrar</button>
 							</form>
