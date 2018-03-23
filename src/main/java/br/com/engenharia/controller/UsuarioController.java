@@ -23,23 +23,39 @@ public class UsuarioController {
 	@Post({"/usuario/adicionar", "/usuario/adicionar/"})
 	public void adicionar(Usuario usuario) {
 		if(usuarios.verificarUsuarioPorEmail(usuario)) {
-			result.include("erro", "Jï¿½ existe um usuï¿½rio com esse email.");
+			result.include("erro", "Já existe um usuário com esse email.");
 		} else {
 			usuarios.adicionar(usuario);
-			result.include("mensagem", "Usuï¿½rio adicionado com sucesso.");
+			result.include("mensagem", "Usuário adicionado com sucesso.");
 		}
 		result.redirectTo(LoginController.class).telaLogin();
 	}
 	
 	@Get({"/usuario/principal", "/usuario/principal/"})
 	public void principal() {
-		
 		Long idUsuario = session.getUsuario().getId();
 		
 		Usuario usuario = usuarios.buscar(idUsuario);
 		List<Publicacao> publicacoesParaLinhaDoTempo = usuario.publicacoesParaLinhaDoTempo();
+		List<Usuario> amigos = usuario.getAmigos();
 		
 		result.include("feed", publicacoesParaLinhaDoTempo);
+		result.include("amigos", amigos);
+	}
+	
+	@Get({"/usuario/seguir/{id}", "/usuario/seguir/{id}/"})
+	public void seguir(long id) {
+		Usuario usuario = usuarios.pesquisarUsuarioPorId(id);
+		Usuario usuarioLogado = usuarios.pesquisarUsuarioPorId(session.getUsuario().getId());
 		
+		usuarioLogado.getAmigos().add(usuario);
+		
+		usuarios.atualizar(usuarioLogado);
+	}
+	
+	@Get({"/usuario/listar/", "/usuario/listar"})
+	public void listar(String nome) {
+		List<Usuario> listaUsuarios = usuarios.listarUsuarios(nome);
+		result.include("seguir", listaUsuarios);
 	}
 }

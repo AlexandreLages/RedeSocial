@@ -40,12 +40,14 @@
 	<div class="container-fluid" style="margin-top: 60px;">
 		<div class="row">
 			<div class="col-md-3">
-				<div class="input-group">
-      				<span class="input-group-btn">
-        				<button class="btn btn-default" type="button">Pesquisar</button>
-      				</span>
-      				<input type="text" class="form-control" placeholder="Pesquisar amigos">
-    			</div><!-- /input-group -->
+				<form action="<c:url value="/usuario/listar"/>">
+					<div class="input-group">
+      					<span class="input-group-btn">
+        					<button class="btn btn-default" type="submit">Pesquisar</button>
+      					</span>
+      					<input type="text" class="form-control" placeholder="Pesquisar amigos" name="nome">
+    				</div><!-- /input-group -->
+				</form>
 			</div>
 			<div class="col-md-6">
 				<div class="panel panel-default">
@@ -84,8 +86,9 @@
 					<li class="list-group-item">Meus Amigos</li>
 				</ul>
 				<ul class="list-group">
-					<li class="list-group-item">Irvayne Matheus</li>
-					<li class="list-group-item">Alexandre Lages</li>
+					<c:forEach items="${amigos}" var="amigo">
+						<li class="list-group-item">${amigo.nome}</li>
+					</c:forEach>
 				</ul>
 			</div>
 		</div>
